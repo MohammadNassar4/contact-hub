@@ -1,6 +1,7 @@
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: linear-gradient(160deg, #f3f2f8 70%, #e8f5ee 100%);
+      font-family: "Inter",
+        sans-serif;
+      background: #F8FAFC;
       min-height: 100vh;
     }
 
@@ -12,7 +13,10 @@
     .brand-icon {
       width: 40px;
       height: 40px;
-      background: linear-gradient(135deg, #7c3aed, #6d28d9);
+      background: linear-gradient(to right bottom, #7f22fe, #4f39f6);
+      box-shadow: #00000000 0px 0px 0px 0px,
+        #8e51ff40 0px 10px 15px -3px,
+        #8e51ff40 0px 4px 6px -4px;
       border-radius: 10px;
     }
 
@@ -35,6 +39,7 @@
     /* Navbar */
     .ch-navbar {
       border-bottom: 1px solid #e8e7ef;
+      background-color: #FDFDFE;
     }
 
     .ch-navbar .container {
@@ -42,7 +47,7 @@
     }
 
     .btn-add-contact {
-      background: #7c3aed;
+      background: linear-gradient(to right, #7f22fe, #4f39f6);
       color: #fff;
       border: none;
       border-radius: 8px;
@@ -81,6 +86,13 @@
     .stat-card {
       border-radius: 14px;
       border: 1px solid #ede9fa;
+      transition: 0.2s;
+    }
+
+    .stat-card:hover {
+      box-shadow: #00000000 0px 0px 0px 0px,
+        #0000001a 0px 4px 6px -1px,
+        #0000001a 0px 2px 4px -2px !important;
     }
 
     .stat-icon {
@@ -92,15 +104,25 @@
     }
 
     .stat-icon-blue {
-      background: #5b6cf4;
+      background: linear-gradient(to right bottom, #2b7fff, #155dfb);
+      box-shadow: #00000000 0px 0px 0px 0px,
+
+        #2b7fff40 0px 10px 15px -3px,
+        #2b7fff40 0px 4px 6px -4px;
     }
 
     .stat-icon-amber {
-      background: #f59e0b;
+      background: linear-gradient(to right bottom, #ffb900, #ff6900);
+      box-shadow: #00000000 0px 0px 0px 0px,
+        #fe9a0040 0px 10px 15px -3px,
+        #fe9a0040 0px 4px 6px -4px;
     }
 
     .stat-icon-red {
-      background: #ef4444;
+      background: linear-gradient(to right bottom, #ff2056, #e7000b);
+      box-shadow: #00000000 0px 0px 0px 0px,
+        #ff205640 0px 10px 15px -3px,
+        #ff205640 0px 4px 6px -4px;
     }
 
     .stat-label {
@@ -547,4 +569,28 @@
       background: linear-gradient(90deg,
           #8900de,
           #4f1ae2);
+    }
+
+    .placeholder {
+      padding-block: 80px;
+      cursor: auto;
+    }
+
+    .placeholder-icon {
+      background-color: #e7e6e6;
+      color: #b5b5b5;
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+    }
+
+    .placeholder-title {
+      color: #505560;
+      font-weight: 500;
+      font-size: 1rem;
+    }
+
+    .placeholder-desc {
+      color: #7f8692;
+      font-size: .875rem;
     }

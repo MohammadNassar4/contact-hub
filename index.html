@@ -5,6 +5,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ContactHub – Smart Contact Manager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+    rel="stylesheet">
+  <link rel="shortcut icon" href="imgs/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="css/main.css">
@@ -13,7 +19,7 @@
 <body>
 
   <!-- ── Navbar ── -->
-  <nav class="ch-navbar navbar bg-white px-3 px-md-4 py-2 sticky-top">
+  <nav class="ch-navbar navbar px-3 px-md-4 py-3 sticky-top">
     <div class="container p-0 px-xl-4">
       <div class="d-flex align-items-center gap-2">
         <div class="brand-icon d-flex align-items-center justify-content-center text-white flex-shrink-0">
@@ -32,8 +38,8 @@
         </button>
         <i class="fa-regular fa-bell nav-icon d-none d-md-block"></i>
         <i class="fa-solid fa-gear nav-icon d-none d-md-block"></i>
-        <div class="user-avatar d-flex align-items-center justify-content-center">
-          <i class="fa-solid fa-user text-white" style="font-size:14px;"></i>
+        <div class="user-avatar overflow-hidden rounded-3">
+          <img src="imgs/avatar-4.jpg" alt="user avatar" class="w-100">
         </div>
       </div>
     </div>
@@ -45,7 +51,7 @@
       <!-- Stat Cards -->
       <div class="row g-3 mb-4">
         <div class="col-12 col-sm-6 col-md-4">
-          <div class="card stat-card border-0 shadow-none h-100">
+          <div class="card stat-card border-0 shadow-sm h-100">
             <div class="card-body d-flex align-items-center gap-3 p-3">
               <div
                 class="stat-icon stat-icon-blue d-flex align-items-center justify-content-center text-white rounded-3">
@@ -59,7 +65,7 @@
           </div>
         </div>
         <div class="col-12 col-sm-6 col-md-4">
-          <div class="card stat-card border-0 shadow-none h-100">
+          <div class="card stat-card border-0 shadow-sm h-100">
             <div class="card-body d-flex align-items-center gap-3 p-3">
               <div
                 class="stat-icon stat-icon-amber d-flex align-items-center justify-content-center text-white rounded-3">
@@ -73,7 +79,7 @@
           </div>
         </div>
         <div class="col-12 col-sm-6 col-md-4">
-          <div class="card stat-card border-0 shadow-none h-100">
+          <div class="card stat-card border-0 shadow-sm h-100">
             <div class="card-body d-flex align-items-center gap-3 p-3">
               <div
                 class="stat-icon stat-icon-red d-flex align-items-center justify-content-center text-white rounded-3">
@@ -92,7 +98,7 @@
         <!-- ── Contacts Column ── -->
         <div class="col-12 col-xl-8">
           <h4 class="fw-bold text-dark mb-1">All Contacts</h4>
-          <p class="text-secondary mb-0" style="font-size:14px;">Manage and organize your 4 contacts</p>
+          <p class="text-secondary mb-0" style="font-size:14px;">Manage and organize your <span id="x"></span> contacts</p>
           <!-- Search -->
           <div class="search-bar d-flex align-items-center gap-2 px-3 py-2 mt-3 mb-4">
             <i class="fa-solid fa-magnifying-glass text-secondary" style="font-size:14px;"></i>
@@ -143,7 +149,7 @@
 
 
   <!-- Modal -->
-  <div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"  
+  <div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content bg-white">
@@ -185,23 +191,23 @@
               <input id="fullName" type="text" class="form-control custom-input" placeholder="Enter full name" required>
               <p class="fs-14 d-none text-danger">Name should contain only letters and spaces (2-50 characters)</p>
             </div>
-            
+
             <!-- Phone -->
             <div class="mb-3">
               <label for="phone" class="form-label field-label">
                 Phone Number <span class="required">*</span>
               </label>
-              
+
               <input id="phone" type="tel" class="form-control custom-input" placeholder="e.g., 01012345678" required>
               <p class="fs-14 d-none text-danger">Please enter a valid Egyptian phone number</p>
             </div>
-            
+
             <!-- Email -->
             <div class="mb-3">
               <label for="email" class="form-label field-label">
                 Email Address
               </label>
-              
+
               <input id="email" type="email" class="form-control custom-input" placeholder="name@example.com">
               <p class="fs-14 d-none text-danger">Please enter a valid email address</p>
             </div>
@@ -287,10 +293,7 @@
     </div>
   </div>
 
-
-
-
-<!-- sweet alerts -->
+  <!-- sweet alerts -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- bootstrap -->
   <script src="js/bootstrap.bundle.min.js"></script>

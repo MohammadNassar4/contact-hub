@@ -18,6 +18,7 @@ var emergencyCount = document.getElementById("emergency-count");
 var favContainer = document.getElementById("fav-container");
 var emeContainer = document.getElementById("eme-container");
 var searchInput = document.getElementById("search-bar");
+var x = document.getElementById("x");
 
 
 var contactIndexToUpdate = -50;
@@ -34,7 +35,7 @@ var favoriteContacts = [];
 var emergencyContacts = [];
 
 // * assign the local storage array to the contacts array and display the contacts
-if (JSON.parse(localStorage.getItem("contacts")) != false) {
+if (JSON.parse(localStorage.getItem("contacts")) != null) {
   contacts = JSON.parse(localStorage.getItem("contacts"));
   displayContacts(contacts);
 }
@@ -161,82 +162,97 @@ function addContact() {
 function displayContacts(list) {
   var collector = "";
   container.innerHTML = "";
-  for (let i = 0; i < list.length; i++) {
-    collector += `
-                <div class="col-12 col-sm-6">
-              <div class="card contact-card border shadow-sm h-100">
-                <div class="card-body p-3">
-                  <!-- Header -->
-                  <div class="d-flex align-items-start gap-3 mb-3">
-                    <div class="avatar-initials av-purple d-flex align-items-center justify-content-center">
-                      ${list[i].name
-                        .split(" ")
-                        .map((x) => x.slice(0, 1))
-                        .join("")
-                        .toUpperCase()}
 
-                        ${
-                          list[i].favorite
-                            ? `<span
-                        class="badge-dot badge-dot-amber d-flex align-items-center justify-content-center position-absolute">
-                        <i class="fa-solid fa-star"></i>
-                      </span>`
-                            : ``
-                        }
-                        ${
-                          list[i].emergency
-                            ? `<span
-                        class="badge-dot badge-dot-red d-flex align-items-center justify-content-center position-absolute">
-                        <i class="fa-solid fa-heart-pulse"></i>
-                      </span>`
-                            : ``
-                        }
-                      
-                    </div>
-                    <div>
-                      <div class="contact-name">${list[i].name}</div>
-                      <div class="contact-phone d-flex align-items-center gap-1 mt-1">
-                        <i class="fa-solid fa-phone" style="font-size:12px;"></i> ${list[i].phone}
+  if (list.length == 0) {
+    container.innerHTML = `
+        <div class="placeholder bg-transparent text-center">
+    <div class="placeholder-icon d-flex justify-content-center align-items-center mx-auto mb-3">
+      <i class="fa-solid fa-address-book fs-3"></i>
+    </div>
+    <div class="placeholder-title">No contacts found</div>
+    <p class="placeholder-desc mt-1 mb-0">Click "Add Contact" to get started</p>
+  </div>
+    `;
+  } else {
+
+    for (let i = 0; i < list.length; i++) {
+      collector += `
+                  <div class="col-12 col-sm-6">
+                <div class="card contact-card border shadow-sm h-100">
+                  <div class="card-body p-3">
+                    <!-- Header -->
+                    <div class="d-flex align-items-start gap-3 mb-3">
+                      <div class="avatar-initials av-purple d-flex align-items-center justify-content-center">
+                        ${list[i].name
+                          .split(" ")
+                          .map((x) => x.slice(0, 1))
+                          .join("")
+                          .toUpperCase()}
+  
+                          ${
+                            list[i].favorite
+                              ? `<span
+                          class="badge-dot badge-dot-amber d-flex align-items-center justify-content-center position-absolute">
+                          <i class="fa-solid fa-star"></i>
+                        </span>`
+                              : ``
+                          }
+                          ${
+                            list[i].emergency
+                              ? `<span
+                          class="badge-dot badge-dot-red d-flex align-items-center justify-content-center position-absolute">
+                          <i class="fa-solid fa-heart-pulse"></i>
+                        </span>`
+                              : ``
+                          }
+                        
+                      </div>
+                      <div>
+                        <div class="contact-name">${list[i].name}</div>
+                        <div class="contact-phone d-flex align-items-center gap-1 mt-1">
+                          <i class="fa-solid fa-phone" style="font-size:12px;"></i> ${list[i].phone}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <!-- Details -->
-                  <div class="contact-detail d-flex align-items-center gap-2 mb-2">
-                    <i class="fa-solid fa-envelope" style="width:14px; font-size:12px;"></i> ${list[i].email}
-                  </div>
-                  <div class="contact-detail d-flex align-items-center gap-2 mb-2">
-                    <i class="fa-solid fa-location-dot" style="width:14px; font-size:12px;"></i> ${list[i].address}
-                  </div>
-                  <!-- Tags -->
-                  <div class="d-flex flex-wrap gap-2 mt-2 mb-3">
-                    <span class="tag tag-friends">${list[i].group}</span>
-                    ${
-                      list[i].emergency
-                        ? `<span class="tag tag-emergency d-flex align-items-center gap-1">
-                      <i class="fa-solid fa-heart-pulse" style="font-size:9px;"></i> Emergency
-                    </span>`
-                        : ``
-                    }
-                  </div>
-                  <!-- Actions -->
-                  <div class="card-divider pt-2 d-flex align-items-center justify-content-between">
-                    <div class="d-flex gap-2">
-                      <a href="tel:${list[i].phone}"><button class="act-btn act-btn-call"><i class="fa-solid fa-phone"></i></button></a>
-                      <a href="mailto:${list[i].email}"><button class="act-btn act-btn-mail"><i class="fa-solid fa-envelope"></i></button></a>
+                    <!-- Details -->
+                    <div class="contact-detail d-flex align-items-center gap-2 mb-2">
+                      <i class="fa-solid fa-envelope" style="width:14px; font-size:12px;"></i> ${list[i].email}
                     </div>
-                    <div class="d-flex gap-1">
-                      <button onclick="toggleFavorite(${i})" class="act-btn"><i class="${list[i].favorite ? `fa-solid fa-star" style="color: rgb(255, 212, 59);` : `fa-regular fa-star`}"></i></button>
-                      <button onclick="toggleEmergency(${i})" class="act-btn ${list[i].emergency ? `act-btn-heart-active` : `act-btn-heart`}"><i class="fa-solid fa-heart-pulse"></i></button>
-                      <button onclick="updateForm(${i})" class="act-btn"><i class="fa-solid fa-pen"></i></button>
-                      <button onclick="deletionAlert(${i})" class="act-btn act-btn-del"><i class="fa-solid fa-trash"></i></button>
+                    <div class="contact-detail d-flex align-items-center gap-2 mb-2">
+                      <i class="fa-solid fa-location-dot" style="width:14px; font-size:12px;"></i> ${list[i].address}
+                    </div>
+                    <!-- Tags -->
+                    <div class="d-flex flex-wrap gap-2 mt-2 mb-3">
+                      <span class="tag tag-friends">${list[i].group}</span>
+                      ${
+                        list[i].emergency
+                          ? `<span class="tag tag-emergency d-flex align-items-center gap-1">
+                        <i class="fa-solid fa-heart-pulse" style="font-size:9px;"></i> Emergency
+                      </span>`
+                          : ``
+                      }
+                    </div>
+                    <!-- Actions -->
+                    <div class="card-divider pt-2 d-flex align-items-center justify-content-between">
+                      <div class="d-flex gap-2">
+                        <a href="tel:${list[i].phone}"><button class="act-btn act-btn-call"><i class="fa-solid fa-phone"></i></button></a>
+                        <a href="mailto:${list[i].email}"><button class="act-btn act-btn-mail"><i class="fa-solid fa-envelope"></i></button></a>
+                      </div>
+                      <div class="d-flex gap-1">
+                        <button onclick="toggleFavorite(${i})" class="act-btn"><i class="${list[i].favorite ? `fa-solid fa-star" style="color: rgb(255, 212, 59);` : `fa-regular fa-star`}"></i></button>
+                        <button onclick="toggleEmergency(${i})" class="act-btn ${list[i].emergency ? `act-btn-heart-active` : `act-btn-heart`}"><i class="fa-solid fa-heart-pulse"></i></button>
+                        <button onclick="updateForm(${i})" class="act-btn"><i class="fa-solid fa-pen"></i></button>
+                        <button onclick="deletionAlert(${i})" class="act-btn act-btn-del"><i class="fa-solid fa-trash"></i></button>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-    `;
-    container.innerHTML = collector;
+      `;
+      container.innerHTML = collector;
+    }
   }
+
 }
 
 function deletionAlert(index) {
@@ -276,6 +292,8 @@ function updateStats() {
   var emeCollector = "";
   favoriteContacts = [];
   emergencyContacts = [];
+
+  x.innerText = contacts.length;
 
   for (let i = 0; i < contacts.length; i++) {
     if (contacts[i].favorite) {
